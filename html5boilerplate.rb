@@ -1,6 +1,4 @@
-# This template installs the new jQuery drivers, removes
-# the old prototype drivers, and adds a line to the config
-# which overrides the :defaults expansion and
+# See README for additional information.
 # Written by: Russ Frisch
 # http://github.com/russfrisch/Rails-HTML5-Boilerplate-Template
 # Inspired by: Logan Leger's Rails 3 JQuery Template
