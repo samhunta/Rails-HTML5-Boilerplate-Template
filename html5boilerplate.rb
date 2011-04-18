@@ -20,7 +20,7 @@ get "https://github.com/paulirish/html5-boilerplate/raw/master/js/libs/dd_belate
 get "https://github.com/paulirish/html5-boilerplate/raw/master/js/plugins.js", "public/javascripts/plugins.js"
 
 # Download Stylesheets
-get "https://github.com/paulirish/html5-boilerplate/raw/master/css/style.css", "public/stylesheets/style.css"
+get "https://github.com/paulirish/html5-boilerplate/raw/master/css/style.css", "public/stylesheets/application.css"
 get "https://github.com/paulirish/html5-boilerplate/raw/master/css/handheld.css", "public/stylesheets/handheld/handheld.css"
 
 # Download Site Root Assets
