@@ -36,9 +36,10 @@ end
 get "https://github.com/paulirish/html5-boilerplate/raw/master/index.html", "app/views/layouts/application.html.erb"
 gsub_file 'app/views/layouts/application.html.erb', /<link rel="stylesheet" href="css\/style.css">/ do
   "<%= stylesheet_link_tag :all, :cache => true %>
-   <%= stylesheet_link_tag \"handheld/handheld\", :media => \"handheld\" %>"
+  <%= stylesheet_link_tag \"handheld/handheld\", :media => \"handheld\" %>"
 end
-# TODO: Remove old handheld stylesheet from HTML5 boilerplate 
+gsub_file 'app/views/layouts/application.html.erb', /<!-- Uncomment if you are specifically targeting less enabled mobile browsers/, '\1'
+gsub_file 'app/views/layouts/application.html.erb', /<link rel="stylesheet" media="handheld" href="css\/handheld.css">  -->/, '\1'
 gsub_file 'app/views/layouts/application.html.erb', /<script src="js\/libs\/modernizr-1.7.min.js"><\/script>/, '<%= javascript_include_tag "modernizr" %>'
 gsub_file 'app/views/layouts/application.html.erb', /<meta charset="utf-8">/ do
   "<meta charset=\"utf-8\">
@@ -48,14 +49,14 @@ gsub_file 'app/views/layouts/application.html.erb', /<div id="container">[\s\S]*
 gsub_file 'app/views/layouts/application.html.erb', /<!-- Grab Google CDN's jQuery[\s\S]*end scripts-->/, '<%= javascript_include_tag :defaults, :cache => true %>'
 gsub_file 'app/views/layouts/application.html.erb', /<script src="js\/libs\/dd_belatedpng.js"><\/script>/, '<%= javascript_include_tag "dd_belatedpng" %>'
 
-
 # Remove jQuery Comments in application.rb
 gsub_file 'config/application.rb', /#\s*(JavaScript files you want as :defaults (application.js is always included).)/, '\1'
 gsub_file 'config/application.rb', /#\s*(config.action_view.javascript_expansions[:defaults] = %w(jquery rails))/, '\1'
 
 # Add expansions to application.rb
 application do
-  " # Added by the Rails HTML5 Boilerplate Template
+  "  # Added by the Rails HTML5 Boilerplate Template
     # https://github.com/russfrisch/Rails-HTML5-Boilerplate-Template, written by Russ Frisch
-    config.action_view.javascript_expansions[:defaults] = %w(jquery plugins rails)"
+    config.action_view.javascript_expansions[:defaults] = %w(jquery plugins rails)    
+  "
 end
