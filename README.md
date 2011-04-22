@@ -6,13 +6,13 @@ This template was inspired by Logan Leger's Rails 3 JQuery Template (https://git
 How to Use
 ===========
 Rails 3:<br> 
-`rails new <appname> -m <path/to/rails3.rb>`
+`rails new <appname> -m <path/to/rails3.rb>`<br>
 Rails 3.1:<br> 
 `rails new <appname> -m <path/to/rails3.1.rb>`
 
 Can also be run directly from github:<br>
 Rails 3:<br>
-`rails new <appname> -m https://github.com/russfrisch/Rails-HTML5-Boilerplate-Template/raw/master/rails3.rb`
+`rails new <appname> -m https://github.com/russfrisch/Rails-HTML5-Boilerplate-Template/raw/master/rails3.rb`<br>
 Rails 3.1:<br>
 `rails new <appname> -m https://github.com/russfrisch/Rails-HTML5-Boilerplate-Template/raw/master/rails3.1.rb`	
 
