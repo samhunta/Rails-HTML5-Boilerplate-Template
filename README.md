@@ -1,17 +1,23 @@
 About
-=====
+======
 A Rails application template used to setup a new Rails app using Paul Irish's HTML5 Boilerplate (http://html5boilerplate.com/)<br>
 This template was inspired by Logan Leger's Rails 3 JQuery Template (https://github.com/lleger/Rails-3-jQuery)
 
 How to Use
-=========
-`rails new <appname> -m <path/to/html5boilerplate.rb>`
+===========
+Rails 3:<br> 
+`rails new <appname> -m <path/to/rails3.rb>`
+Rails 3.1:<br> 
+`rails new <appname> -m <path/to/rails3.1.rb>`
 
 Can also be run directly from github:<br>
-`rails new <appname> -m https://github.com/russfrisch/Rails-HTML5-Boilerplate-Template/raw/master/html5boilerplate.rb`
+Rails 3:<br>
+`rails new <appname> -m https://github.com/russfrisch/Rails-HTML5-Boilerplate-Template/raw/master/rails3.rb`
+Rails 3.1:<br>
+`rails new <appname> -m https://github.com/russfrisch/Rails-HTML5-Boilerplate-Template/raw/master/rails3.1.rb`	
 
-Process
-=======
+Rails 3 Version
+================
 This template does the following:
 
 1.  Removes default Prototype/Scriptaculous JavaScripts and Rails driver
@@ -21,6 +27,10 @@ This template does the following:
 5.  Modifies the updated application.html.erb to add back in the appropriate default Rails content 
 6.  Updates javascript :defaults expansion to include jquery, plugins, and rails driver.
 
+Rails 3.1 Version
+================
+Comming soon...
+
 Push Requests
-============
+==============
 This is my first template so if there is anything that can be done better or you would like to see tweaked, please send me a push request.

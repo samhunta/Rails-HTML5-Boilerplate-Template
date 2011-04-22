@@ -20,8 +20,12 @@ get "https://github.com/paulirish/html5-boilerplate/raw/master/js/libs/dd_belate
 get "https://github.com/paulirish/html5-boilerplate/raw/master/js/plugins.js", "public/javascripts/plugins.js"
 
 # Download Stylesheets
-get "https://github.com/paulirish/html5-boilerplate/raw/master/css/style.css", "public/stylesheets/application.css"
+get "https://github.com/paulirish/html5-boilerplate/raw/master/css/style.css", "public/stylesheets/_reset.css"
 get "https://github.com/paulirish/html5-boilerplate/raw/master/css/handheld.css", "public/stylesheets/handheld/handheld.css"
+# Create application.css for application styles
+inside('public/stylesheets') do
+  FileUtils.touch 'application.css'
+end
 
 # Download Site Root Assets
 get "https://github.com/paulirish/html5-boilerplate/raw/master/apple-touch-icon.png", "public/apple-touch-icon.png"
