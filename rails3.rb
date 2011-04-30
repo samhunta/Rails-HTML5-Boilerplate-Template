@@ -13,34 +13,37 @@ end
 # Download latest jQuery drivers
 get "https://github.com/rails/jquery-ujs/raw/master/src/rails.js", "public/javascripts/rails.js"
 
-# Download JavaScripts
+# Download HTML5 Boilerplate JavaScripts
 get "https://github.com/paulirish/html5-boilerplate/raw/master/js/libs/modernizr-1.7.min.js", "public/javascripts/modernizr.js"
 get "https://github.com/paulirish/html5-boilerplate/raw/master/js/libs/jquery-1.5.2.min.js", "public/javascripts/jquery.js"
 get "https://github.com/paulirish/html5-boilerplate/raw/master/js/libs/dd_belatedpng.js", "public/javascripts/dd_belatedpng.js"
 get "https://github.com/paulirish/html5-boilerplate/raw/master/js/plugins.js", "public/javascripts/plugins.js"
 
-# Download Stylesheets
-get "https://github.com/paulirish/html5-boilerplate/raw/master/css/style.css", "public/stylesheets/_reset.css"
-get "https://github.com/paulirish/html5-boilerplate/raw/master/css/handheld.css", "public/stylesheets/handheld/handheld.css"
-# Create application.css for application styles
+# Download HTML5 Boilerplate Stylesheet
+get "https://github.com/paulirish/html5-boilerplate/raw/master/css/style.css", "public/stylesheets/desktop.css"
+# Download Mobile HTML5 Boilerplate Stylesheet
+get "https://github.com/shichuan/mobile-html5-boilerplate/raw/master/css/style.css", "public/stylesheets/mobile.css"
+
+# Create application.css for application styles and add import statment for scaffold.css
 inside('public/stylesheets') do
   FileUtils.touch 'application.css'
 end
+append_file 'public/stylesheets/application.css', '@import url("scaffold.css"); /* Remove is not using scaffolding */'
 
-# Download Site Root Assets
+# Download HTML5 Boilerplate Site Root Assets
 get "https://github.com/paulirish/html5-boilerplate/raw/master/apple-touch-icon.png", "public/apple-touch-icon.png"
 get "https://github.com/paulirish/html5-boilerplate/raw/master/crossdomain.xml", "public/crossdomain.xml"
 get "https://github.com/paulirish/html5-boilerplate/raw/master/humans.txt", "public/humans.txt"
 get "https://github.com/paulirish/html5-boilerplate/blob/master/.htaccess", "public/.htaccess"
 
-# Merge application.html.erb with HTML5 Boilerplate index template
+# Update application.html.erb with HTML5 Boilerplate index.html content
 inside('app/views/layouts') do
   FileUtils.rm_rf 'application.html.erb'
 end
 get "https://github.com/paulirish/html5-boilerplate/raw/master/index.html", "app/views/layouts/application.html.erb"
 gsub_file 'app/views/layouts/application.html.erb', /<link rel="stylesheet" href="css\/style.css">/ do
-  "<%= stylesheet_link_tag :all, :cache => true %>
-  <%= stylesheet_link_tag \"handheld/handheld\", :media => \"handheld\" %>"
+  "<%= stylesheet_link_tag \"desktop\", \"application\", :media => \"all\", :cache => \"styles\" %>
+  <%= stylesheet_link_tag \"mobile\", :media => \"handheld\" %>"
 end
 gsub_file 'app/views/layouts/application.html.erb', /<!-- Uncomment if you are specifically targeting less enabled mobile browsers/, '\1'
 gsub_file 'app/views/layouts/application.html.erb', /<link rel="stylesheet" media="handheld" href="css\/handheld.css">  -->/, '\1'
@@ -52,6 +55,13 @@ end
 gsub_file 'app/views/layouts/application.html.erb', /<div id="container">[\s\S]*<\/div>/, '<%= yield %>'
 gsub_file 'app/views/layouts/application.html.erb', /<!-- Grab Google CDN's jQuery[\s\S]*end scripts-->/, '<%= javascript_include_tag :defaults, :cache => true %>'
 gsub_file 'app/views/layouts/application.html.erb', /<script src="js\/libs\/dd_belatedpng.js"><\/script>/, '<%= javascript_include_tag "dd_belatedpng" %>'
+
+# Create application.mobile.erb with Mobile HTML5 Boilerplate index.html content
+get "https://github.com/shichuan/mobile-html5-boilerplate/raw/master/index.html", "app/views/layouts/application.mobile.erb"
+gsub_file 'app/views/layouts/application.mobile.erb', /<meta charset="utf-8">/ do
+  "<meta charset=\"utf-8\">
+   <%= csrf_meta_tag %>"
+end
 
 # Remove jQuery Comments in application.rb
 gsub_file 'config/application.rb', /#\s*(JavaScript files you want as :defaults (application.js is always included).)/, '\1'
