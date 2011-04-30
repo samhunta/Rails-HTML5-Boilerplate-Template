@@ -19,13 +19,14 @@ This template does the following:
 1.  Removes default Prototype/Scriptaculous JavaScripts and Rails driver
 2.  Downloads the latest JQuery Rails driver and places into the javascripts folder
 3.  Downloads HTML5 Boilerplate assets: JavaScripts, Stylesheets, icons, .htaccess, etc.
-4.  Replaces the <i>contents</i> of default application.html.erb layout with the contents of HTML5 boilerplate's index.html
-5.  Modifies the updated application.html.erb to add back in the appropriate default Rails content 
-6.  Updates javascript :defaults expansion to include jquery, plugins, and rails driver.
+4.  Creates an empty application.css and then adds to it an @import to import the scaffold.css.
+5.  Replaces the <i>contents</i> of default application.html.erb layout with the contents of HTML5 boilerplate's index.html
+6.  Modifies the updated application.html.erb to add back in the appropriate default Rails content 
+7.  Updates javascript :defaults expansion to include jquery, plugins, and rails driver.
 
 Rails 3.1 Version
 ================
-Comming soon... Current template is just a place holder.
+Comming soon with optional support to revert out CoffeeScript and SCSS changes if you so desire.
 
 Push Requests
 ==============
