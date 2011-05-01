@@ -50,7 +50,7 @@ gsub_file 'app/views/layouts/application.html.erb', /<link rel="stylesheet" medi
 gsub_file 'app/views/layouts/application.html.erb', /<script src="js\/libs\/modernizr-1.7.min.js"><\/script>/, '<%= javascript_include_tag "modernizr" %>'
 gsub_file 'app/views/layouts/application.html.erb', /<meta charset="utf-8">/ do
   "<meta charset=\"utf-8\">
-   <%= csrf_meta_tag %>"
+  <%= csrf_meta_tag %>"
 end
 gsub_file 'app/views/layouts/application.html.erb', /<div id="container">[\s\S]*<\/div>/, '<%= yield %>'
 gsub_file 'app/views/layouts/application.html.erb', /<!-- Grab Google CDN's jQuery[\s\S]*end scripts-->/, '<%= javascript_include_tag :defaults, :cache => true %>'
@@ -60,7 +60,7 @@ gsub_file 'app/views/layouts/application.html.erb', /<script src="js\/libs\/dd_b
 get "https://github.com/shichuan/mobile-html5-boilerplate/raw/master/index.html", "app/views/layouts/application.mobile.erb"
 gsub_file 'app/views/layouts/application.mobile.erb', /<meta charset="utf-8">/ do
   "<meta charset=\"utf-8\">
-   <%= csrf_meta_tag %>"
+  <%= csrf_meta_tag %>"
 end
 
 # Remove jQuery Comments in application.rb
@@ -73,4 +73,19 @@ application do
     # https://github.com/russfrisch/Rails-HTML5-Boilerplate-Template, written by Russ Frisch
     config.action_view.javascript_expansions[:defaults] = %w(jquery plugins rails)    
   "
+end
+
+# Add Mime type alias for mobile
+gsub_file 'config/initializers/mime_types.rb', /# Mime::Type.register_alias "text\/html", :iphone/, 'Mime::Type.register_alias "text/html", :mobile'
+
+# Add Detect Mobile Before Filter to ApplicationController
+gsub_file 'app/controllers/application_controller.rb', /protect_from_forgery/ do
+  "protect_from_forgery
+   
+  before_filter :detect_mobile
+   
+  def detect_mobile
+    request.format = :mobile if request.user_agent =~ /Mobile|webOS/
+  end
+   "
 end
