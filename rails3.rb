@@ -57,7 +57,7 @@ gsub_file 'app/views/layouts/application.html.erb', /<!-- Grab Google CDN's jQue
 gsub_file 'app/views/layouts/application.html.erb', /<script src="js\/libs\/dd_belatedpng.js"><\/script>/, '<%= javascript_include_tag "dd_belatedpng" %>'
 
 # Create application.mobile.erb with Mobile HTML5 Boilerplate index.html content
-get "https://github.com/shichuan/mobile-html5-boilerplate/raw/master/index.html", "app/views/layouts/application.mobile.erb"
+get "https://github.com/shichuan/mobile-html5-boilerplate/raw/master/index.html", "app/views/layouts/application.mobile.html.erb"
 gsub_file 'app/views/layouts/application.mobile.erb', /<meta charset="utf-8">/ do
   "<meta charset=\"utf-8\">
   <%= csrf_meta_tag %>"
@@ -76,16 +76,20 @@ application do
 end
 
 # Add Mime type alias for mobile
-gsub_file 'config/initializers/mime_types.rb', /# Mime::Type.register_alias "text\/html", :iphone/, 'Mime::Type.register_alias "text/html", :mobile'
+# gsub_file 'config/initializers/mime_types.rb', /# Mime::Type.register_alias "text\/html", :iphone/, 'Mime::Type.register_alias "text/html", :mobile'
 
 # Add Detect Mobile Before Filter to ApplicationController
 gsub_file 'app/controllers/application_controller.rb', /protect_from_forgery/ do
   "protect_from_forgery
    
-  before_filter :detect_mobile
-   
-  def detect_mobile
-    request.format = :mobile if request.user_agent =~ /Mobile|webOS/
+  layout :mobile_layout?
+
+  def mobile_layout?
+    if request.user_agent =~ /Mobile|webOS/
+      \"application.mobile\"
+    else
+      \"application\"
+    end
   end
    "
 end
