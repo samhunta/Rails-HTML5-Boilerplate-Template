@@ -15,13 +15,12 @@ get "https://github.com/rails/jquery-ujs/raw/master/src/rails.js", "public/javas
 
 # Download HTML5 Boilerplate JavaScripts
 get "https://github.com/paulirish/html5-boilerplate/raw/master/js/libs/modernizr-1.7.min.js", "public/javascripts/modernizr.js"
-get "https://github.com/paulirish/html5-boilerplate/raw/master/js/libs/jquery-1.5.2.min.js", "public/javascripts/jquery.js"
-get "https://github.com/paulirish/html5-boilerplate/raw/master/js/libs/dd_belatedpng.js", "public/javascripts/dd_belatedpng.js"
+get "https://github.com/paulirish/html5-boilerplate/raw/master/js/libs/jquery-1.6.min.js", "public/javascripts/jquery.js"
+get "https://github.com/paulirish/html5-boilerplate/raw/master/js/libs/respond.min.js", "public/javascripts/respond.js"
 get "https://github.com/paulirish/html5-boilerplate/raw/master/js/plugins.js", "public/javascripts/plugins.js"
 
 # Download HTML5 Boilerplate Stylesheet
-get "https://github.com/paulirish/html5-boilerplate/raw/master/css/style.css", "public/stylesheets/desktop.css"
-get "https://github.com/paulirish/html5-boilerplate/raw/master/css/handheld.css", "public/stylesheets/mobile.css"
+get "https://github.com/paulirish/html5-boilerplate/raw/master/css/style.css", "public/stylesheets/style.css"
 
 # Create application.css for application styles and add import statment for scaffold.css
 inside('public/stylesheets') do
@@ -30,6 +29,10 @@ end
 append_file 'public/stylesheets/application.css', '@import url("scaffold.css"); /* Remove is not using scaffolding */'
 
 # Download HTML5 Boilerplate Site Root Assets
+get "https://github.com/paulirish/html5-boilerplate/raw/master/apple-touch-icon-114x114-precomposed.png", "public/apple-touch-icon-114x114-precomposed.png"
+get "https://github.com/paulirish/html5-boilerplate/raw/master/apple-touch-icon-57x57-precomposed.png", "public/apple-touch-icon-57x57-precomposed.png"
+get "https://github.com/paulirish/html5-boilerplate/raw/master/apple-touch-icon-72x72-precomposed.png", "public/apple-touch-icon-72x72-precomposed.png"
+get "https://github.com/paulirish/html5-boilerplate/raw/master/apple-touch-icon-precomposed.png", "public/apple-touch-icon-precomposed.png"
 get "https://github.com/paulirish/html5-boilerplate/raw/master/apple-touch-icon.png", "public/apple-touch-icon.png"
 get "https://github.com/paulirish/html5-boilerplate/raw/master/crossdomain.xml", "public/crossdomain.xml"
 get "https://github.com/paulirish/html5-boilerplate/raw/master/humans.txt", "public/humans.txt"
@@ -41,19 +44,16 @@ inside('app/views/layouts') do
 end
 get "https://github.com/paulirish/html5-boilerplate/raw/master/index.html", "app/views/layouts/application.html.erb"
 gsub_file 'app/views/layouts/application.html.erb', /<link rel="stylesheet" href="css\/style.css">/ do
-  "<%= stylesheet_link_tag \"desktop\", \"application\", :media => \"all\", :cache => \"styles\" %>
-  <%= stylesheet_link_tag \"mobile\", :media => \"handheld\" %>"
+  "<%= stylesheet_link_tag \"style\", \"application\", :media => \"all\", :cache => \"styles\" %>"
 end
-gsub_file 'app/views/layouts/application.html.erb', /<!-- Uncomment if you are specifically targeting less enabled mobile browsers/, '\1'
-gsub_file 'app/views/layouts/application.html.erb', /<link rel="stylesheet" media="handheld" href="css\/handheld.css">  -->/, '\1'
-gsub_file 'app/views/layouts/application.html.erb', /<script src="js\/libs\/modernizr-1.7.min.js"><\/script>/, '<%= javascript_include_tag "modernizr" %>'
+gsub_file 'app/views/layouts/application.html.erb', /<script src="js\/libs\/modernizr-1.7.min.js"><\/script>/, '<%= javascript_include_tag "modernizr", "respond", :cache => "modernizer-respond" %>'
+gsub_file 'app/views/layouts/application.html.erb', /<script src='js\/libs\/respond.min.js'><\/script>/, '\1'
 gsub_file 'app/views/layouts/application.html.erb', /<meta charset="utf-8">/ do
   "<meta charset=\"utf-8\">
    <%= csrf_meta_tag %>"
 end
 gsub_file 'app/views/layouts/application.html.erb', /<div id="container">[\s\S]*<\/div>/, '<%= yield %>'
 gsub_file 'app/views/layouts/application.html.erb', /<!-- Grab Google CDN's jQuery[\s\S]*end scripts-->/, '<%= javascript_include_tag :defaults, :cache => true %>'
-gsub_file 'app/views/layouts/application.html.erb', /<script src="js\/libs\/dd_belatedpng.js"><\/script>/, '<%= javascript_include_tag "dd_belatedpng" %>'
 
 # Remove jQuery Comments in application.rb
 gsub_file 'config/application.rb', /#\s*(JavaScript files you want as :defaults (application.js is always included).)/, '\1'
@@ -63,6 +63,6 @@ gsub_file 'config/application.rb', /#\s*(config.action_view.javascript_expansion
 application do
   "  # Added by the Rails HTML5 Boilerplate Template
     # https://github.com/russfrisch/Rails-HTML5-Boilerplate-Template, written by Russ Frisch
-    config.action_view.javascript_expansions[:defaults] = %w(jquery plugins rails)    
+    config.action_view.javascript_expansions[:defaults] = %w(jquery rails plugins)
   "
 end
