@@ -36,7 +36,7 @@ get "https://github.com/paulirish/html5-boilerplate/raw/master/apple-touch-icon-
 get "https://github.com/paulirish/html5-boilerplate/raw/master/apple-touch-icon.png", "public/apple-touch-icon.png"
 get "https://github.com/paulirish/html5-boilerplate/raw/master/crossdomain.xml", "public/crossdomain.xml"
 get "https://github.com/paulirish/html5-boilerplate/raw/master/humans.txt", "public/humans.txt"
-get "https://github.com/paulirish/html5-boilerplate/blob/master/.htaccess", "public/.htaccess"
+get "https://github.com/paulirish/html5-boilerplate/raw/master/.htaccess", "public/.htaccess"
 
 # Update application.html.erb with HTML5 Boilerplate index.html content
 inside('app/views/layouts') do
